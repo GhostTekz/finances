@@ -33,9 +33,10 @@ if ! command -v Rscript &>/dev/null; then
   echo "R is not installed. Installing R..."
   case "$PKG_MGR" in
     dnf)
-      sudo dnf install -y R R-devel openssl-devel libcurl-devel libxml2-devel \
+      sudo dnf install -y R R-devel gcc-gfortran \
+        openssl-devel libcurl-devel libxml2-devel \
         harfbuzz-devel fribidi-devel freetype-devel libpng-devel libtiff-devel \
-        libjpeg-turbo-devel pandoc fontconfig-devel
+        libjpeg-turbo-devel pandoc fontconfig-devel cmake
       ;;
     apt)
       sudo apt-get update -qq
@@ -66,10 +67,11 @@ echo "Checking system library dependencies..."
 case "$PKG_MGR" in
   dnf|yum)
     sudo "$PKG_MGR" install -y \
+      R-devel gcc-gfortran \
       openssl-devel libcurl-devel libxml2-devel \
       harfbuzz-devel fribidi-devel freetype-devel \
       libpng-devel libtiff-devel libjpeg-turbo-devel \
-      fontconfig-devel pandoc 2>/dev/null || true
+      fontconfig-devel pandoc cmake 2>/dev/null || true
     ;;
   apt)
     sudo apt-get install -y --no-install-recommends \
