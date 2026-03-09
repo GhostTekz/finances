@@ -31,7 +31,7 @@ if (length(to_install) > 0) {
     to_install,
     repos        = "https://cloud.r-project.org",
     lib          = user_lib,
-    dependencies = TRUE
+    dependencies = c("Depends", "Imports", "LinkingTo")
   )
 } else {
   cat("All required packages are already installed.\n")
